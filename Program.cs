@@ -19,7 +19,11 @@ namespace Garage
         1. Allows one type to include all of the public properties and methods of another type.
         2. It reduces duplicated code when many types in a program all have the same properties 
            and methods.
+
+
+        
         */
+
         static void Main(string[] args)
         {
             Zero fxs = new Zero()
@@ -44,8 +48,11 @@ namespace Garage
             };
 
             fxs.Drive();
+            fxs.Turn("left");
             modelS.Drive();
             mx410.Drive();
+            mx410.Turn("right");
+            mx410.Stop();
             bigTruck.Drive();
         }
     }

@@ -15,5 +15,10 @@ namespace Garage
         {
             Console.WriteLine($"The {MainColor} Cessna goes Krakrakrapeeet!");
         }
+
+        public override void Stop()
+        {
+            Console.WriteLine($"The {MainColor} Cessna does and barrelroll and stops ded in its tracks.");
+        }
     }
 }
