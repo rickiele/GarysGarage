@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace Garage
 {
@@ -31,32 +32,30 @@ namespace Garage
             Zero fx = new Zero();
             Tesla modelS = new Tesla();
 
-            fx.CurrentChargePercentage = "20%";
-            fxs.CurrentChargePercentage = "60%";
-            modelS.CurrentChargePercentage = "10%";
+            fx.CurrentChargePercentage = 20;
+            fxs.CurrentChargePercentage = 60;
+            modelS.CurrentChargePercentage = 70;
 
 
             List<IElectricVehicle> electricVehicles = new List<IElectricVehicle>() {
                 fx, fxs, modelS
               };
 
-            Console.WriteLine("--Electric Vehicles Current - Charge");
+            Console.WriteLine("----Electric Vehicles----");
             foreach (IElectricVehicle ev in electricVehicles)
             {
-                Console.WriteLine($"{ev.CurrentChargePercentage}");
+                Console.WriteLine($"The {ev.GetType().Name} is currently at {ev.CurrentChargePercentage}");
             }
 
-            Console.WriteLine("--Electric Vehicles - Charge battery to 100%");
             foreach (IElectricVehicle ev in electricVehicles)
             {
                 // This should charge the vehicle to 100%
-                ev.ChargeBattery("100");
+                ev.ChargeBattery(1);
             }
 
-            Console.WriteLine("--Vehicles after charge.");
             foreach (IElectricVehicle ev in electricVehicles)
             {
-                Console.WriteLine($"{ev.CurrentChargePercentage}");
+                Console.WriteLine($"The {ev.GetType().Name} is back at {ev.CurrentChargePercentage}.");
             }
 
             /***********************************************/
@@ -69,23 +68,21 @@ namespace Garage
                 ram, cessna150
               };
 
-            Console.WriteLine("--Gas Vehicles - Before Refuel");
+            Console.WriteLine("----Gas Vehicles----");
             foreach (IGasVehicle gv in gasVehicles)
             {
-                Console.WriteLine($"{gv.CurrentTankPercentage}");
+                Console.WriteLine($"The {gv.GetType().Name} is currently at {gv.CurrentTankPercentage}.");
             }
 
-            Console.WriteLine("--Gas Vehicles - Being Refueled");
             foreach (IGasVehicle gv in gasVehicles)
             {
                 // This should completely refuel the gas tank
-                gv.RefuelTank(100.00);
+                gv.RefuelTank(1);
             }
 
-            Console.WriteLine("--Gas Vehicles - After Refuel");
             foreach (IGasVehicle gv in gasVehicles)
             {
-                Console.WriteLine($"{gv.CurrentTankPercentage}");
+                Console.WriteLine($"The {gv.GetType().Name} is back at {gv.CurrentTankPercentage}.");
             }
         }
     }
