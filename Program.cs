@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Garage
 {
@@ -26,34 +27,66 @@ namespace Garage
 
         static void Main(string[] args)
         {
-            Zero fxs = new Zero()
+            Zero fxs = new Zero();
+            Zero fx = new Zero();
+            Tesla modelS = new Tesla();
+
+            fx.CurrentChargePercentage = "20%";
+            fxs.CurrentChargePercentage = "60%";
+            modelS.CurrentChargePercentage = "10%";
+
+
+            List<IElectricVehicle> electricVehicles = new List<IElectricVehicle>() {
+                fx, fxs, modelS
+              };
+
+            Console.WriteLine("--Electric Vehicles Current - Charge");
+            foreach (IElectricVehicle ev in electricVehicles)
             {
-                MainColor = "Orange"
-            };
+                Console.WriteLine($"{ev.CurrentChargePercentage}");
+            }
 
-
-            Tesla modelS = new Tesla()
+            Console.WriteLine("--Electric Vehicles - Charge battery to 100%");
+            foreach (IElectricVehicle ev in electricVehicles)
             {
-                MainColor = "Black"
-            };
+                // This should charge the vehicle to 100%
+                ev.ChargeBattery("100");
+            }
 
-            Cessna mx410 = new Cessna()
+            Console.WriteLine("--Vehicles after charge.");
+            foreach (IElectricVehicle ev in electricVehicles)
             {
-                MainColor = "Plurple"
-            };
+                Console.WriteLine($"{ev.CurrentChargePercentage}");
+            }
 
-            Ram bigTruck = new Ram()
+            /***********************************************/
+            Console.WriteLine("\n");
+
+            Ram ram = new Ram();
+            Cessna cessna150 = new Cessna();
+
+            List<IGasVehicle> gasVehicles = new List<IGasVehicle>() {
+                ram, cessna150
+              };
+
+            Console.WriteLine("--Gas Vehicles - Before Refuel");
+            foreach (IGasVehicle gv in gasVehicles)
             {
-                MainColor = "Blooberry Blue"
-            };
+                Console.WriteLine($"{gv.CurrentTankPercentage}");
+            }
 
-            fxs.Drive();
-            fxs.Turn("left");
-            modelS.Drive();
-            mx410.Drive();
-            mx410.Turn("right");
-            mx410.Stop();
-            bigTruck.Drive();
+            Console.WriteLine("--Gas Vehicles - Being Refueled");
+            foreach (IGasVehicle gv in gasVehicles)
+            {
+                // This should completely refuel the gas tank
+                gv.RefuelTank(100.00);
+            }
+
+            Console.WriteLine("--Gas Vehicles - After Refuel");
+            foreach (IGasVehicle gv in gasVehicles)
+            {
+                Console.WriteLine($"{gv.CurrentTankPercentage}");
+            }
         }
     }
 }
